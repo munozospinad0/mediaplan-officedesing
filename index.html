@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Media Plan — Office Design | ECUS Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violet:#6C2BD9;--violet-bright:#8B3FF0;--violet-soft:#A56BF5;
+  --lilac:#EEE6FC;--lilac-deep:#D9C7F7;--ink:#140720;--ink-soft:#2A1638;
+  --paper:#FBF8FF;--white:#FFFFFF;--accent:#C9FF3B;--gray:#7E6E8C;--line:rgba(108,43,217,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Sora',sans-serif;background:var(--ink);color:var(--ink);overflow:hidden;position:fixed;inset:0}
+.deck{position:relative;width:100%;height:100%;overflow:hidden}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:clamp(2rem,7vw,7vh) clamp(1.4rem,7vw,7vw);padding-bottom:calc(env(safe-area-inset-bottom) + 5rem);overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--paper)}
+.slide.active{display:flex;animation:fade .55s cubic-bezier(.2,.7,.2,1)}
+@keyframes fade{from{opacity:0;transform:translateY(18px) scale(.99)}to{opacity:1;transform:none}}
+.slide.dark{background:radial-gradient(120% 120% at 80% 0%,#241036 0%,#140720 70%);color:var(--paper)}
+.slide.violet{background:linear-gradient(150deg,#1F0A38 0%,#6C2BD9 58%,#9D52F5 100%);color:#fff}
+.inner{width:100%;max-width:1100px;margin:0 auto}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--violet);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem}
+.kicker::before{content:"";width:26px;height:2px;background:var(--violet)}
+.slide.dark .kicker,.slide.violet .kicker{color:var(--accent)}
+.slide.dark .kicker::before,.slide.violet .kicker::before{background:var(--accent)}
+h1{font-size:clamp(2.5rem,8vw,5.4rem);font-weight:800;line-height:.96;letter-spacing:-.025em}
+h2{font-size:clamp(1.9rem,5.2vw,3.4rem);font-weight:700;line-height:1.01;letter-spacing:-.02em;margin-bottom:1.4rem}
+h3{font-size:clamp(1rem,2.4vw,1.18rem);font-weight:700;margin-bottom:.45rem;line-height:1.2}
+p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
+.slide.dark p,.slide.violet p{color:rgba(255,255,255,.84)}
+.lead{font-size:clamp(1.05rem,2.6vw,1.3rem);max-width:62ch;color:var(--gray);font-weight:400;line-height:1.5}
+.slide.dark .lead,.slide.violet .lead{color:rgba(255,255,255,.82)}
+.cover-logo{font-family:'Space Mono',monospace;font-weight:700;letter-spacing:.32em;font-size:.74rem;color:#fff;opacity:.9}
+.cover-grid{display:flex;flex-direction:column;gap:clamp(1rem,3vw,1.5rem);z-index:2;position:relative}
+.badge-row{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.8rem}
+.badge{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.04em;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);padding:.5rem .85rem;border-radius:100px;color:#fff;backdrop-filter:blur(4px)}
+.cover-foot{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 4.5rem);left:clamp(1.4rem,7vw,7vw);right:clamp(1.4rem,7vw,7vw);display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.06em;color:rgba(255,255,255,.72);gap:1rem}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);z-index:0;pointer-events:none}
+.blob.a{width:46vw;height:46vw;max-width:560px;max-height:560px;background:#9D52F5;top:-12vw;right:-10vw;opacity:.6}
+.blob.b{width:32vw;height:32vw;max-width:380px;max-height:380px;background:var(--accent);bottom:-10vw;left:-8vw;opacity:.14}
+.grain{position:absolute;inset:0;z-index:1;opacity:.5;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+.cards{display:grid;gap:clamp(.7rem,1.8vw,1.1rem);margin-top:.4rem}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:clamp(1.1rem,2.6vw,1.5rem);box-shadow:0 14px 38px -22px rgba(108,43,217,.45);transition:.3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 22px 50px -24px rgba(108,43,217,.55)}
+.card .ico{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,var(--lilac),var(--lilac-deep));display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:.85rem}
+.card .big{font-size:clamp(1.6rem,4vw,2rem);font-weight:800;color:var(--violet);line-height:1;letter-spacing:-.02em}
+.card small{color:var(--gray);font-size:.8rem;display:block;margin-top:.2rem}
+.slide.dark .card{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.1);backdrop-filter:blur(6px)}
+.slide.dark .card .ico{background:rgba(139,63,240,.28)}
+.slide.dark .card .big{color:var(--accent)}
+.slide.dark .card small{color:rgba(255,255,255,.6)}
+table{width:100%;border-collapse:collapse;margin-top:.3rem;font-size:clamp(.84rem,2vw,.93rem)}
+td{padding:.68rem .2rem;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-weight:600;color:var(--violet);width:40%;padding-right:.8rem}
+.slide.dark td{border-color:rgba(255,255,255,.12)}
+.slide.dark td:first-child{color:var(--accent)}
+.pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.7rem}
+.pill{background:var(--lilac);color:var(--violet);font-size:clamp(.76rem,1.8vw,.84rem);font-weight:600;padding:.42rem .8rem;border-radius:100px;border:1px solid transparent}
+.slide.dark .pill{background:rgba(165,107,245,.16);color:#E3D3FB;border-color:rgba(165,107,245,.3)}
+.bar-row{display:flex;align-items:center;gap:clamp(.6rem,2vw,1rem);margin:.55rem 0}
+.bar-label{width:clamp(96px,22vw,170px);font-weight:600;font-size:clamp(.78rem,1.9vw,.9rem);flex:none}
+.bar-track{flex:1;height:30px;background:rgba(255,255,255,.1);border-radius:9px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--violet-bright),var(--accent));display:flex;align-items:center;padding-left:.7rem;color:var(--ink);font-size:.76rem;font-weight:700;border-radius:9px;min-width:fit-content}
+.bar-val{width:clamp(56px,14vw,90px);text-align:right;font-weight:700;color:var(--accent);flex:none;font-size:clamp(.82rem,2vw,1rem)}
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.7rem,1.8vw,1.1rem);margin-top:.3rem}
+.month{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:clamp(1.1rem,2.6vw,1.5rem);position:relative;box-shadow:0 14px 38px -24px rgba(108,43,217,.45);overflow:hidden}
+.month::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--violet),var(--accent))}
+.month .mnum{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--gray)}
+.month .mbudget{font-size:clamp(1.6rem,4.5vw,2rem);font-weight:800;color:var(--violet);margin:.15rem 0 .7rem;letter-spacing:-.02em}
+.month ul{list-style:none;font-size:clamp(.82rem,1.9vw,.88rem);color:var(--ink-soft)}
+.month li{padding:.34rem 0 .34rem 1.15rem;position:relative;line-height:1.35}
+.month li::before{content:"→";position:absolute;left:0;color:var(--violet-soft);font-weight:700}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:.3rem}
+.step{display:flex;gap:.9rem;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:15px;padding:clamp(.9rem,2.2vw,1.15rem);transition:.25s}
+.step:hover{border-color:var(--violet-soft)}
+.step .n{flex:none;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--violet),var(--violet-bright));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.92rem}
+.step p{font-size:clamp(.82rem,1.9vw,.9rem)}
+.note{margin-top:1.3rem;font-size:clamp(.8rem,1.9vw,.86rem);color:var(--gray);border-left:3px solid var(--violet-soft);padding-left:1rem;line-height:1.55;max-width:80ch}
+.slide.dark .note,.slide.violet .note{color:rgba(255,255,255,.72)}
+.note.hi{border-color:var(--accent)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,4vw,2.6rem);align-items:start}
+.metric-big{font-size:clamp(1.8rem,5.5vw,3.2rem);font-weight:800;color:var(--violet);line-height:1;letter-spacing:-.02em}
+.slide.dark .metric-big{color:var(--accent)}
+.split-head{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;margin-bottom:.3rem}
+.tag-main{background:var(--accent);color:var(--ink);font-family:'Space Mono',monospace;font-size:.64rem;font-weight:700;padding:.32rem .6rem;border-radius:6px;letter-spacing:.04em;white-space:nowrap}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.7rem,1.8vw,1.1rem);margin-top:.4rem}
+.stat{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:clamp(1rem,2.4vw,1.4rem)}
+.stat .num{font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:800;color:var(--violet);line-height:1;letter-spacing:-.02em}
+.stat .lbl{font-size:.82rem;color:var(--gray);margin-top:.35rem;line-height:1.35}
+.slide.dark .stat{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.1)}
+.slide.dark .stat .num{color:var(--accent)}
+.slide.dark .stat .lbl{color:rgba(255,255,255,.6)}
+.qbox{background:var(--lilac);border-radius:14px;padding:clamp(.9rem,2.4vw,1.2rem);margin-top:.9rem;border-left:3px solid var(--violet)}
+.qbox .qlabel{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.12em;color:var(--violet);text-transform:uppercase}
+.qbox p{font-size:clamp(.88rem,2vw,.96rem);margin-top:.35rem;font-weight:500;color:var(--ink)}
+.nav{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 1.4rem);left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.9rem;background:rgba(20,7,32,.9);backdrop-filter:blur(14px);padding:.55rem 1rem;border-radius:100px;z-index:50;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 40px -10px rgba(0,0,0,.5)}
+.nav button{background:none;border:none;color:#fff;font-size:1.15rem;cursor:pointer;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s}
+.nav button:active{transform:scale(.9)}
+.nav button:hover{background:rgba(255,255,255,.18)}
+.nav .count{font-family:'Space Mono',monospace;font-size:.76rem;color:#fff;letter-spacing:.08em;min-width:58px;text-align:center}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--violet-bright),var(--accent));z-index:60;transition:width .45s cubic-bezier(.2,.7,.2,1);box-shadow:0 0 12px var(--accent)}
+.hint{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 1.7rem);right:1.4vw;font-family:'Space Mono',monospace;font-size:.64rem;color:var(--gray);z-index:50}
+.foot-sig{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 1.6rem);right:clamp(1.4rem,7vw,7vw);font-family:'Space Mono',monospace;font-size:.62rem;color:var(--gray);letter-spacing:.05em;opacity:.7}
+.slide.dark .foot-sig,.slide.violet .foot-sig{color:rgba(255,255,255,.45)}
+@media(max-width:780px){
+  .hint{display:none}
+  .cards.c4{grid-template-columns:repeat(2,1fr)}
+  .cards.c3{grid-template-columns:1fr}
+  .months{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr}
+  .foot-sig{display:none}
+  .slide{justify-content:flex-start}
+  .slide.violet,.slide.dark.center{justify-content:center}
+}
+@media(max-width:480px){.cards.c4{grid-template-columns:1fr}.badge{font-size:.62rem;padding:.42rem .7rem}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+<!-- 1 COVER -->
+<section class="slide violet active">
+  <div class="blob a"></div><div class="blob b"></div><div class="grain"></div>
+  <div class="inner cover-grid">
+    <div class="cover-logo">ECUS AGENCY · PAID MEDIA</div>
+    <h1>Media Plan<br>Office&nbsp;Design</h1>
+    <p class="lead" style="color:rgba(255,255,255,.92);font-size:clamp(1.1rem,3vw,1.35rem)">Estrategia de generación de leads en Meta Ads · Mobiliario y sillas de oficina · Ciudad de Panamá</p>
+    <div class="badge-row">
+      <span class="badge">OBJETIVO · CPL / LEADS</span>
+      <span class="badge">META ADS · IG + FB</span>
+      <span class="badge">90 DÍAS · ESCALADO</span>
+      <span class="badge">$200 → $400 USD/MES</span>
+    </div>
+  </div>
+  <div class="cover-foot"><span>Paid Media Specialist · ECUS Agency</span><span>2026</span></div>
+</section>
+
+<!-- 2 RESUMEN -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">01 · Resumen ejecutivo</div>
+    <h2>Panorama general</h2>
+    <p class="lead">Plan de 3 meses en Meta Ads enfocado en generar leads calificados (CPL) para Office Design mediante formularios instantáneos, escalando la inversión de forma progresiva y siempre guiada por los resultados.</p>
+    <div class="cards c4" style="margin-top:1.8rem">
+      <div class="card"><div class="ico">🎯</div><h3>Objetivo</h3><p style="font-size:.9rem">Captar <strong>leads</strong> (CPL) con Instant Forms nativos de Meta</p></div>
+      <div class="card"><div class="ico">📈</div><div class="big">$200→$400</div><small>USD/mes · escalado en 90 días</small></div>
+      <div class="card"><div class="ico">📍</div><h3>Mercado</h3><p style="font-size:.9rem">Ciudad de Panamá y área metropolitana</p></div>
+      <div class="card"><div class="ico">⚡</div><h3>Sin landing aún</h3><p style="font-size:.9rem">Arrancamos con Instant Forms; el sitio web se contempla más adelante</p></div>
+    </div>
+    <p class="note">Para arrancar no necesitamos sitio web ni píxel: los formularios instantáneos viven dentro de Facebook e Instagram, lo que reduce la fricción y ayuda a bajar el costo por lead en un mercado como el panameño. Es la forma más ágil de empezar a traer prospectos desde el día uno.</p>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 3 MERCADO -->
+<section class="slide dark center">
+  <div class="inner">
+    <div class="kicker">02 · Investigación de mercado</div>
+    <h2>Qué está pasando en Panamá</h2>
+    <p class="lead">El mobiliario de oficina vive un momento interesante: conviven el home office que llegó para quedarse y el regreso de muchas empresas a espacios físicos que necesitan renovarse. Dos demandas distintas, una misma marca para atenderlas.</p>
+    <div class="stat-row" style="margin-top:1.6rem">
+      <div class="stat"><div class="num">2 mundos</div><div class="lbl">Hogar (B2C) y oficina corporativa (B2B) compran al mismo tiempo, por motivos distintos</div></div>
+      <div class="stat"><div class="num">Ergonomía</div><div class="lbl">Es hoy el principal motor de compra: salud, postura y confort lideran la decisión</div></div>
+      <div class="stat"><div class="num">Local</div><div class="lbl">Players como Arista o Modulares Nova ya pelean el B2B; el ángulo ergonómico + B2C está menos saturado</div></div>
+    </div>
+    <p class="note hi">Lectura estratégica: la conversación de mercado gira en torno a <strong>bienestar, ergonomía y diseño de espacios</strong>. Por eso el plan apoya los mensajes en esos beneficios (no solo en el producto), y separa al comprador de casa del comprador corporativo, que tienen necesidades y tiempos de decisión muy diferentes.</p>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 4 ESTRATEGIA -->
+<section class="slide dark center">
+  <div class="inner">
+    <div class="kicker">03 · Enfoque estratégico</div>
+    <h2>La estructura para Meta 2026</h2>
+    <div class="two-col">
+      <div>
+        <p class="lead">Con un presupuesto inicial ajustado, fragmentar en muchas campañas frena el aprendizaje del algoritmo. La jugada correcta en 2026 es <strong style="color:var(--accent)">consolidar</strong>: pocas campañas, señales claras de audiencia y dejar que la inteligencia artificial de Meta (Andromeda) haga el trabajo de expansión.</p>
+        <p style="margin-top:1.1rem">Concentramos el 85% del presupuesto en generación de leads, y reservamos un 15% para Awareness, que amplifica el contenido orgánico, sube impresiones y seguidores, y va calentando audiencias para el remarketing del mes 3.</p>
+      </div>
+      <div class="cards" style="gap:.85rem">
+        <div class="card"><span class="tag-main">CAMPAÑA PRINCIPAL · 85%</span><h3 style="margin-top:.7rem">Lead Generation (CPL)</h3><p style="font-size:.9rem">2 ad sets: B2C (persona natural) + B2B (contratistas / empresas). Instant Form con lógica condicional.</p></div>
+        <div class="card"><span class="tag-main" style="background:var(--violet);color:#fff">AWARENESS · 15%</span><h3 style="margin-top:.7rem">Awareness / Engagement</h3><p style="font-size:.9rem">Amplifica orgánico, sube seguidores e impresiones, con opción Click-to-WhatsApp. Calienta audiencias.</p></div>
+        <div class="card"><h3>Remarketing + Lookalike <span style="font-size:.68rem;color:var(--violet-soft)">(desde mes 3)</span></h3><p style="font-size:.9rem">Re-impacta a quienes interactuaron y crea lookalikes a partir de los leads ya recolectados.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 5 ANDROMEDA -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">04 · Cómo trabajamos el targeting</div>
+    <h2>Aproximación + IA de Meta</h2>
+    <div class="two-col">
+      <div>
+        <p class="lead">Algo clave para entender el plan: los intereses y datos demográficos que verás en las próximas láminas son una <strong style="color:var(--violet)">aproximación inicial</strong>, un punto de partida, no una jaula.</p>
+        <p style="margin-top:1.1rem">En 2026, Meta recomienda apoyarse en su motor de inteligencia artificial, <strong>Andromeda</strong>, para la expansión de audiencias. Nosotros cargamos estas señales (intereses, edades, comportamientos) y el sistema las usa como brújula para encontrar a más personas parecidas que realmente convierten, siguiendo las mejores prácticas recomendadas por la propia plataforma.</p>
+      </div>
+      <div class="cards" style="gap:.85rem">
+        <div class="card"><div class="ico">🧭</div><h3>Nosotros damos la señal</h3><p style="font-size:.9rem">Definimos intereses, edades y perfiles base por cada audiencia.</p></div>
+        <div class="card"><div class="ico">🤖</div><h3>Andromeda expande</h3><p style="font-size:.9rem">La IA de Meta amplía hacia perfiles similares con mayor probabilidad de dejar sus datos.</p></div>
+        <div class="card"><div class="ico">🔄</div><h3>Optimizamos con datos reales</h3><p style="font-size:.9rem">Ajustamos según el comportamiento real de la campaña, semana a semana.</p></div>
+      </div>
+    </div>
+    <p class="note hi">En corto: usamos la segmentación como guía, pero dejamos que el algoritmo respire. Es la combinación que mejor rinde hoy con presupuestos como el nuestro.</p>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 6 LOGICA CONDICIONAL -->
+<section class="slide dark center">
+  <div class="inner">
+    <div class="kicker">05 · Inteligencia en el formulario</div>
+    <h2>Lógica condicional</h2>
+    <div class="two-col">
+      <div>
+        <p class="lead">Usaremos <strong style="color:var(--accent)">lógica condicional</strong> en los formularios instantáneos: las preguntas cambian según lo que la persona responde.</p>
+        <p style="margin-top:1.1rem">Si alguien dice que compra para su casa, ve un camino; si dice que es para una empresa, ve otro con preguntas distintas. Así filtramos mejor sin alargar el formulario para todos.</p>
+        <p style="margin-top:1.1rem">¿Por qué importa? Porque le devuelve a Meta <strong>señales más limpias</strong> de quién es un buen lead. Eso alimenta mejor a Andromeda, que aprende a buscar más perfiles parecidos a los que sí valen — bajando el costo por lead calificado con el tiempo. Es una de las mejores prácticas actuales en plataforma.</p>
+      </div>
+      <div class="cards" style="gap:.85rem">
+        <div class="card"><div class="ico">🔀</div><h3>Pregunta puente</h3><p style="font-size:.9rem">"¿La compra es para tu hogar o para una empresa?" → divide el camino.</p></div>
+        <div class="card"><div class="ico">🎯</div><h3>Califica sin fricción</h3><p style="font-size:.9rem">Cada rama hace solo las preguntas que importan a ese perfil.</p></div>
+        <div class="card"><div class="ico">🧠</div><h3>Mejor aprendizaje</h3><p style="font-size:.9rem">Leads más limpios = señales más precisas = algoritmo más eficiente.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 7 AUDIENCIA B2C -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">06 · Audiencia A</div>
+    <div class="split-head"><h2 style="margin-bottom:0">Persona natural · B2C</h2><span class="tag-main">AD SET 1</span></div>
+    <p class="lead">Quien compra para sí mismo: home office, profesionales independientes, trabajo remoto, o quien quiere una silla ergonómica de calidad para su casa.</p>
+    <div class="two-col" style="margin-top:1.5rem">
+      <div>
+        <table>
+          <tr><td>Edad</td><td>28 – 55 años</td></tr>
+          <tr><td>Ubicación</td><td>Ciudad de Panamá + área metropolitana</td></tr>
+          <tr><td>Comportamiento</td><td>Trabajo remoto / home office / compras online</td></tr>
+        </table>
+        <div class="qbox"><span class="qlabel">Pregunta calificadora</span><p>"¿Para cuándo estás pensando renovar tu espacio de trabajo?" <span style="color:var(--gray);font-weight:400">(mide intención de compra)</span></p></div>
+      </div>
+      <div>
+        <h3 style="color:var(--violet)">Intereses semilla (aproximación)</h3>
+        <div class="pills">
+          <span class="pill">Home office</span><span class="pill">Ergonomía</span>
+          <span class="pill">Teletrabajo</span><span class="pill">Sillas ergonómicas</span>
+          <span class="pill">Diseño de interiores</span><span class="pill">Productividad</span>
+          <span class="pill">Freelancers</span><span class="pill">Gaming / setup</span>
+          <span class="pill">Decoración del hogar</span><span class="pill">Salud postural</span>
+          <span class="pill">Bienestar</span><span class="pill">Tecnología</span>
+        </div>
+        <p class="note hi">Punto de partida, no límite: Andromeda toma estos intereses como señal y expande hacia perfiles que convierten.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 8 AUDIENCIA B2B -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">06 · Audiencia B</div>
+    <div class="split-head"><h2 style="margin-bottom:0">Contratistas y empresas · B2B</h2><span class="tag-main">AD SET 2</span></div>
+    <p class="lead">Quien compra por volumen: contratistas, diseñadores de interiores, oficinas que amueblan o renuevan, administradores de facilities.</p>
+    <div class="two-col" style="margin-top:1.5rem">
+      <div>
+        <table>
+          <tr><td>Edad</td><td>30 – 60 años</td></tr>
+          <tr><td>Rol / cargo</td><td>Dueños de negocio, compras, administración</td></tr>
+          <tr><td>Sectores</td><td>Construcción, arquitectura, corporativo, coworking</td></tr>
+        </table>
+        <div class="qbox"><span class="qlabel">Pregunta calificadora</span><p>"¿Cuántos puestos de trabajo necesitas equipar?" <span style="color:var(--gray);font-weight:400">(mide volumen y tamaño del proyecto)</span></p></div>
+      </div>
+      <div>
+        <h3 style="color:var(--violet)">Intereses / targeting (aproximación)</h3>
+        <div class="pills">
+          <span class="pill">Arquitectura</span><span class="pill">Diseño de interiores</span>
+          <span class="pill">Construcción</span><span class="pill">Facility management</span>
+          <span class="pill">Emprendedores</span><span class="pill">Pequeña y mediana empresa</span>
+          <span class="pill">Bienes raíces comerciales</span><span class="pill">Coworking</span>
+          <span class="pill">Remodelación de oficinas</span><span class="pill">Recursos humanos</span>
+          <span class="pill">Gerencia / administración</span><span class="pill">Mobiliario corporativo</span>
+        </div>
+        <p class="note hi">La rama B2B del formulario usa esta pregunta para priorizar proyectos grandes y separar leads de alto valor del volumen B2C.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 9 PRESUPUESTO -->
+<section class="slide dark center">
+  <div class="inner">
+    <div class="kicker">07 · Distribución de inversión</div>
+    <h2>Cómo se reparte cada mes</h2>
+    <p class="lead">El grueso siempre vive en Lead Gen (85%). Awareness (15%) sostiene el orgánico y, desde el mes 3, parte del presupuesto entra a remarketing usando los leads ya capturados.</p>
+    <div style="margin-top:1.8rem;max-width:820px">
+      <div class="bar-row"><div class="bar-label">Lead Gen (CPL)</div><div class="bar-track"><div class="bar-fill" style="width:85%">85%</div></div><div class="bar-val">~$170</div></div>
+      <div class="bar-row"><div class="bar-label">Awareness (CPM)</div><div class="bar-track"><div class="bar-fill" style="width:15%">15%</div></div><div class="bar-val">~$30</div></div>
+    </div>
+    <p style="margin-top:.9rem;font-size:.84rem;color:rgba(255,255,255,.6)">▲ Reparto del Mes 1 ($200). Desde el Mes 3, dentro del 85% de Lead Gen se reserva una porción para Remarketing + Lookalike.</p>
+    <div class="cards c3" style="margin-top:1.8rem">
+      <div class="card"><div class="mnum" style="font-family:'Space Mono',monospace;color:var(--violet-soft);font-size:.7rem;letter-spacing:.14em">MES 1</div><div class="big">$200</div><small>~$6.6/día · validación</small></div>
+      <div class="card"><div class="mnum" style="font-family:'Space Mono',monospace;color:var(--violet-soft);font-size:.7rem;letter-spacing:.14em">MES 2</div><div class="big">$300</div><small>~$10/día · optimización</small></div>
+      <div class="card"><div class="mnum" style="font-family:'Space Mono',monospace;color:var(--violet-soft);font-size:.7rem;letter-spacing:.14em">MES 3</div><div class="big">$400</div><small>~$13.3/día · escala</small></div>
+    </div>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 10 PLAN 3 MESES -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">08 · Hoja de ruta</div>
+    <h2>Escalado en 90 días</h2>
+    <div class="months">
+      <div class="month">
+        <div class="mnum">MES 1 · VALIDAR</div><div class="mbudget">$200</div>
+        <ul><li>Lanzar Lead Gen (B2C + B2B)</li><li>3–4 variantes de creativo</li><li>Awareness amplifica orgánico</li><li>Medir CPL real por ad set</li><li>Pausar lo que no rinde</li></ul>
+      </div>
+      <div class="month">
+        <div class="mnum">MES 2 · OPTIMIZAR</div><div class="mbudget">$300</div>
+        <ul><li>+$100 al ad set ganador</li><li>Nuevos ángulos de copy</li><li>Afinar la lógica condicional</li><li>Subir frecuencia de orgánico</li><li>Preparar audiencias de RMK</li></ul>
+      </div>
+      <div class="month">
+        <div class="mnum">MES 3 · ESCALAR</div><div class="mbudget">$400</div>
+        <ul><li>Activar Remarketing + Lookalike</li><li>Escalar ganadores +20%</li><li>Lookalike de leads capturados</li><li>Consolidar mejor audiencia</li><li>Reporte y plan mes 4</li></ul>
+      </div>
+    </div>
+    <p class="note hi"><strong>El aumento de presupuesto no es automático: depende de los resultados.</strong> Cada salto ($200 → $300 → $400) se da solo si la campaña lo justifica, es decir, si el CPL se mantiene dentro del objetivo y hay estabilidad. Si los números todavía no acompañan, sostenemos la inversión y seguimos optimizando antes de subir. Los incrementos se hacen de forma gradual (~20–50% sobre el ad set ganador) para no reiniciar la fase de aprendizaje de Meta.</p>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 11 CREATIVOS -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">09 · Dirección creativa</div>
+    <h2>Formatos y ángulos</h2>
+    <div class="cards c4" style="margin-top:.4rem">
+      <div class="card"><div class="ico">🎬</div><h3>Reel / Video 9:16</h3><p style="font-size:.85rem">Silla en uso real, detalle de ergonomía. Subtítulos siempre.</p></div>
+      <div class="card"><div class="ico">🖼️</div><h3>Carrusel</h3><p style="font-size:.85rem">Modelos, beneficios, antes/después de un espacio.</p></div>
+      <div class="card"><div class="ico">✏️</div><h3>Instant Form</h3><p style="font-size:.85rem">Con lógica condicional B2C / B2B + pantalla de gracias.</p></div>
+      <div class="card"><div class="ico">⭐</div><h3>Boost orgánico</h3><p style="font-size:.85rem">Mejores posts amplificados para Awareness.</p></div>
+    </div>
+    <div class="two-col" style="margin-top:1.6rem">
+      <div>
+        <h3 style="color:var(--violet)">Ángulos de copy · B2C</h3>
+        <div class="pills">
+          <span class="pill">"Tu espalda te lo va a agradecer"</span>
+          <span class="pill">"Home office que se ve y se siente pro"</span>
+          <span class="pill">"Ergonomía sin gastar de más"</span>
+          <span class="pill">"8 horas sentado merecen una buena silla"</span>
+          <span class="pill">"Convierte tu cuarto en una oficina real"</span>
+          <span class="pill">"Adiós dolor de espalda al final del día"</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="color:var(--violet)">Ángulos de copy · B2B</h3>
+        <div class="pills">
+          <span class="pill">"Amobla tu oficina con un solo proveedor"</span>
+          <span class="pill">"Precios por volumen para contratistas"</span>
+          <span class="pill">"Cotiza tu proyecto en 1 minuto"</span>
+          <span class="pill">"Equipa a tu equipo sin dolores de cabeza"</span>
+          <span class="pill">"Oficinas que tus empleados van a querer usar"</span>
+          <span class="pill">"De la cotización a la entrega, contigo"</span>
+        </div>
+      </div>
+    </div>
+    <p class="note">Prioridad absoluta: contenido <strong>real</strong> sobre stock. Producto en contexto, personas usándolo, y el gancho dentro de los primeros 3 segundos en video.</p>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 12 PROYECCIONES -->
+<section class="slide dark center">
+  <div class="inner">
+    <div class="kicker">10 · Proyecciones</div>
+    <h2>Métricas estimadas · por mes</h2>
+    <p class="lead">Rangos conservadores con buen margen, basados en benchmarks de Meta 2026 ajustados a Panamá / LATAM. El CPL se diferencia por audiencia: el B2C es más barato y de volumen; el B2B es más caro pero de mayor valor. Estimaciones orientativas, no garantías.</p>
+    <div class="months" style="margin-top:1.5rem">
+      <div class="month">
+        <div class="mnum">MES 1 · $200</div>
+        <ul style="margin-top:.3rem">
+          <li>CPL B2C: <strong>$4–10</strong></li>
+          <li>CPL B2B: <strong>$10–25</strong></li>
+          <li>Leads totales: <strong>20–45</strong></li>
+          <li>CPM Awareness: <strong>$3–7</strong></li>
+        </ul>
+      </div>
+      <div class="month">
+        <div class="mnum">MES 2 · $300</div>
+        <ul style="margin-top:.3rem">
+          <li>CPL B2C: <strong>$3.5–9</strong></li>
+          <li>CPL B2B: <strong>$9–22</strong></li>
+          <li>Leads totales: <strong>35–70</strong></li>
+          <li>CPM Awareness: <strong>$3–6</strong></li>
+        </ul>
+      </div>
+      <div class="month">
+        <div class="mnum">MES 3 · $400</div>
+        <ul style="margin-top:.3rem">
+          <li>CPL B2C: <strong>$3–8</strong></li>
+          <li>CPL B2B: <strong>$8–20</strong></li>
+          <li>Leads totales: <strong>50–95</strong></li>
+          <li>+ Remarketing activo</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note hi">⚠ El CPL baja mes a mes a medida que el algoritmo aprende y afinamos creativos y lógica condicional. Acumulado de 90 días: <strong>~105–210 leads</strong>. El CTR esperado ronda 1.2–2% y el CPM de Awareness se mantiene bajo por ser tráfico local. Los números reales dependen del creativo, el tamaño de audiencia, la estacionalidad y la competencia; recalibramos al cierre de la semana 2 de cada mes.</p>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 13 SITIO WEB FUTURO -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">11 · Visión a futuro</div>
+    <h2>El sitio web, más adelante</h2>
+    <p class="lead">Arrancamos sin web a propósito, para validar rápido y barato con Instant Forms. Pero un sitio propio es el siguiente paso natural cuando la campaña ya esté trayendo leads de forma estable.</p>
+    <div class="cards c3" style="margin-top:1.6rem">
+      <div class="card"><div class="ico">🌐</div><h3>Landing / web propia</h3><p style="font-size:.9rem">Una página de Office Design que reciba el tráfico y muestre catálogo, beneficios y formulario propio.</p></div>
+      <div class="card"><div class="ico">📊</div><h3>Píxel y conversiones</h3><p style="font-size:.9rem">Instalar el píxel de Meta abre campañas de conversión, retargeting por web y datos más ricos.</p></div>
+      <div class="card"><div class="ico">🚀</div><h3>Escalar con datos propios</h3><p style="font-size:.9rem">Con la web midiendo, podemos optimizar a ventas reales y no solo a leads.</p></div>
+    </div>
+    <p class="note hi">En resumen: hoy priorizamos velocidad y bajo costo de entrada. El sitio web queda <strong>contemplado en la hoja de ruta</strong> para cuando tenga sentido invertir en él, sostenido por los resultados que vaya dando la campaña.</p>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 14 NEXT STEPS -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker">12 · Antes de lanzar</div>
+    <h2>Checklist para estar live</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h3>Accesos</h3><p>Admin de la página de Facebook + cuenta de Instagram de Office Design.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>Business Manager</h3><p>Cuenta publicitaria activa y método de pago configurado.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Material creativo</h3><p>2–3 videos cortos + 6–10 fotos reales del producto en contexto.</p></div></div>
+      <div class="step"><div class="n">4</div><div><h3>WhatsApp (opcional)</h3><p>Número Business para la opción de contacto directo en Awareness.</p></div></div>
+      <div class="step"><div class="n">5</div><div><h3>Aprobación</h3><p>Confirmar presupuesto y fecha de inicio. Live en 24–48h.</p></div></div>
+      <div class="step"><div class="n">6</div><div><h3>Lo demás corre por ECUS</h3><p>Estructura de campaña, formularios con lógica condicional, segmentación y optimización.</p></div></div>
+    </div>
+  </div>
+  <div class="foot-sig">ECUS · OFFICE DESIGN</div>
+</section>
+
+<!-- 15 CIERRE -->
+<section class="slide violet">
+  <div class="blob a"></div><div class="blob b"></div><div class="grain"></div>
+  <div class="inner cover-grid">
+    <div class="cover-logo">ECUS AGENCY</div>
+    <h1>Hagámoslo<br>con ecusencia.</h1>
+    <p class="lead" style="color:rgba(255,255,255,.92);font-size:clamp(1.05rem,3vw,1.28rem)">Listos para lanzar la estrategia de leads de Office Design en cuanto tengamos los accesos y el material.</p>
+    <div class="badge-row"><span class="badge">$200 → $400 USD · 90 DÍAS</span><span class="badge">META ADS · CPL</span></div>
+  </div>
+  <div class="cover-foot"><span>Paid Media Specialist · ECUS Agency</span><span>2026</span></div>
+</section>
+
+</div>
+
+<div class="nav">
+  <button onclick="go(-1)" aria-label="anterior">←</button>
+  <span class="count" id="count">01 / 15</span>
+  <button onclick="go(1)" aria-label="siguiente">→</button>
+  <button onclick="fs()" aria-label="pantalla completa" title="Pantalla completa">⛶</button>
+</div>
+<div class="hint">← → navegar · F pantalla completa</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let i=0;
+function show(n){
+  slides[i].classList.remove('active');
+  i=(n+slides.length)%slides.length;
+  slides[i].classList.add('active');
+  slides[i].scrollTop=0;
+  document.getElementById('count').textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
+}
+function go(d){show(i+d)}
+function fs(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ')go(1);
+  if(e.key==='ArrowLeft')go(-1);
+  if(e.key.toLowerCase()==='f')fs();
+});
+let sx=0,sy=0;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-sx;
+  const dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy))go(dx<0?1:-1);
+});
+show(0);
+</script>
+</body>
+</html>
