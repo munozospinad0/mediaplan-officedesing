@@ -15,10 +15,10 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
-body{font-family:'Sora',sans-serif;background:var(--ink);color:var(--ink);overflow:hidden;position:fixed;inset:0}
-.deck{position:relative;width:100%;height:100%;overflow:hidden}
-.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:clamp(2rem,7vw,7vh) clamp(1.4rem,7vw,7vw);padding-bottom:calc(env(safe-area-inset-bottom) + 5rem);overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--paper)}
-.slide.active{display:flex;animation:fade .55s cubic-bezier(.2,.7,.2,1)}
+body{font-family:'Sora',sans-serif;background:var(--ink);color:var(--ink);overflow-x:hidden}
+.deck{position:relative;width:100%}
+.slide{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:auto;padding:clamp(3rem,7vw,6rem) clamp(1.4rem,7vw,7vw);background:var(--paper);border-bottom:1px solid rgba(0,0,0,.06)}
+.slide{animation:fade .5s ease}
 @keyframes fade{from{opacity:0;transform:translateY(18px) scale(.99)}to{opacity:1;transform:none}}
 .slide.dark{background:radial-gradient(120% 120% at 80% 0%,#241036 0%,#140720 70%);color:var(--paper)}
 .slide.violet{background:linear-gradient(150deg,#1F0A38 0%,#6C2BD9 58%,#9D52F5 100%);color:#fff}
@@ -137,44 +137,45 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
   <div class="inner">
     <div class="kicker">CREATIVO 01</div>
     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0.5rem;">
-      <span style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gray);letter-spacing:.04em">📎 OFI-Copiar-1.mp4</span>
-      <span class="tag-main tag-b2c" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: B2C / HOME OFFICE</span>
+      <span style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gray);letter-spacing:.04em">📎 OFI-Copiar-1.mp4 · Video de las sillas</span>
+      <span class="tag-main tag-b2b" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: ARQUITECTOS</span>
     </div>
+    <p class="lead" style="font-size:.92rem;margin:.2rem 0 1rem">Segmentado exclusivamente para arquitectos. Copy alineado al concepto del video (comparación de sillas / calidad que se especifica en un proyecto). Sin menciones de precio.</p>
     <a href="https://drive.google.com/file/d/1miTefVsQiXPJsM4nz7p8c2xFWBgRLrYg/view?usp=drive_link" target="_blank" class="btn-drive">▶ Ver creativo en Drive</a>
     
     <div class="cards c3">
       <div class="card">
-        <span class="tag-main">VARIANTE A · CONVERSACIONAL</span>
+        <span class="tag-main">VARIANTE A · ESPECIFICACIÓN</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">¿Sientes que trabajar desde casa te deja la espalda molida? 😅 Quizás no eres tú, es tu silla. Te comparto 3 señales claras de que necesitas un cambio urgente para dejar de sufrir en el horario laboral.</p>
+        <p class="copy-text">La silla que especificas dice todo sobre tu proyecto. 🪑 No es lo mismo cumplir el requisito que elevar el espacio. En Office Design te damos las fichas técnicas, opciones ergonómicas y el respaldo para que tu propuesta marque la diferencia.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">¿Te duele la espalda al trabajar?</p>
+        <p class="copy-text">Mobiliario a la altura de tu diseño</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Descubre la silla ideal para ti.</p>
+        <p class="copy-text">Aliado de arquitectos en Panamá.</p>
         <span class="copy-label">CTA</span>
-        <span class="pill">Ver modelos</span>
+        <span class="pill">Solicitar catálogo técnico</span>
       </div>
       <div class="card">
-        <span class="tag-main" style="background:var(--violet-soft);color:#fff;">VARIANTE B · EMPÁTICO</span>
+        <span class="tag-main" style="background:var(--violet-soft);color:#fff;">VARIANTE B · PARTNER</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">Pasamos más de 8 horas sentados al día. Si tu silla actual ya parece una tabla, es momento de pensar en ti. 💆‍♀️ Trabajar remoto debería ser cómodo, dale un vistazo a nuestras opciones ergonómicas.</p>
+        <p class="copy-text">Tu cliente confía en cada detalle que defines. 📐 Por eso necesitas un proveedor que entregue calidad, a tiempo y como lo proyectaste. Trabajamos contigo en el mobiliario de tus proyectos corporativos, desde la especificación hasta la instalación.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">3 señales de que necesitas otra silla</p>
+        <p class="copy-text">Tu aliado en cada proyecto</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Cuida tu postura desde casa.</p>
+        <p class="copy-text">De los planos a la instalación.</p>
         <span class="copy-label">CTA</span>
-        <span class="pill">Más información</span>
+        <span class="pill">Trabajemos juntos</span>
       </div>
       <div class="card">
-        <span class="tag-main" style="background:var(--lilac-deep);color:var(--ink);">VARIANTE C · DIRECTO</span>
+        <span class="tag-main" style="background:var(--lilac-deep);color:var(--ink);">VARIANTE C · CALIDAD</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">Trabajar cómodo cambia por completo tu humor y tu energía. 🔋 Si notas alguna de estas 3 señales, tu cuerpo te está pidiendo un upgrade a gritos. Ven a probar nuestras sillas, tu espalda te lo va a agradecer.</p>
+        <p class="copy-text">Dos sillas pueden verse parecidas en un render, pero la diferencia se siente al sentarse. 💺 Especifica mobiliario que respalde la calidad de tu proyecto: ergonomía real, durabilidad y un acabado que tus clientes notarán. Hablemos de tu próxima obra.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">Invierte en tu comodidad hoy</p>
+        <p class="copy-text">La calidad que tu proyecto merece</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Visita nuestro showroom.</p>
+        <p class="copy-text">Asesoría técnica para tu obra.</p>
         <span class="copy-label">CTA</span>
-        <span class="pill">Contactarnos</span>
+        <span class="pill">Contáctanos</span>
       </div>
     </div>
   </div>
@@ -195,33 +196,33 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <div class="card">
         <span class="tag-main">VARIANTE A · CERO ESTRÉS</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">Sabemos que armar una oficina desde cero asusta por los costos y el tiempo. 🏢 Por eso armamos este combo completo (escritorio + silla + archivador) por $699. Te lo dejamos instalado en 2 días y listo para trabajar.</p>
+        <p class="copy-text">Sabemos que amoblar una oficina completa parece un proceso complejo. 🏢 Por eso nos encargamos de todo: cotización, diseño e instalación de tu proyecto, paso a paso, para que tu espacio quede impecable sin que tengas que preocuparte por nada.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">Tu oficina lista en solo 2 días</p>
+        <p class="copy-text">Amoblamos tu oficina completa</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Instalación rápida en Panamá.</p>
+        <p class="copy-text">Diseño e instalación en Panamá.</p>
         <span class="copy-label">CTA</span>
-        <span class="pill">Cotizar ahora</span>
+        <span class="pill">Cotizar proyecto</span>
       </div>
       <div class="card">
         <span class="tag-main" style="background:var(--violet-soft);color:#fff;">VARIANTE B · FINANCIERO</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">¿Presupuesto ajustado para tu nueva oficina? Te entiendo perfectamente. 💼 Con este combo te llevas todo lo necesario con calidad premium por $699. Así no descapitalizas a tu empresa para arrancar.</p>
+        <p class="copy-text">¿Estás planeando una remodelación o una nueva sede? 💼 Te ayudamos a equipar todos los puestos de trabajo con mobiliario de calidad premium y precios por volumen, optimizando tu presupuesto en proyectos grandes.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">Oficina completa por $699</p>
+        <p class="copy-text">Precios por volumen para tu proyecto</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Calidad que proyecta éxito.</p>
+        <p class="copy-text">Calidad que proyecta tu marca.</p>
         <span class="copy-label">CTA</span>
         <span class="pill">Enviar mensaje</span>
       </div>
       <div class="card">
-        <span class="tag-main" style="background:var(--lilac-deep);color:var(--ink);">VARIANTE C · VALOR/PRECIO</span>
+        <span class="tag-main" style="background:var(--lilac-deep);color:var(--ink);">VARIANTE C · PROYECTO LLAVE EN MANO</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">No tienes que pagar de más para que tu equipo trabaje cómodo y tu oficina se vea increíble. ✨ Por $699 te entregamos el setup completo. Escribe la palabra "COMBO" abajo y nos ponemos en contacto.</p>
+        <p class="copy-text">No tienes que lidiar con varios proveedores para que tu oficina se vea increíble. ✨ Nos encargamos del proyecto completo: mobiliario, diseño e instalación. Escríbenos y agendamos una asesoría sin compromiso.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">Combo Estrella: Ahorra y equipa</p>
+        <p class="copy-text">Un solo proveedor para todo el proyecto</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Escritorio, silla y archivador.</p>
+        <p class="copy-text">Proyecto llave en mano.</p>
         <span class="copy-label">CTA</span>
         <span class="pill">Más información</span>
       </div>
@@ -244,7 +245,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <div class="card">
         <span class="tag-main">VARIANTE A · COLABORATIVO</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">Ser arquitecto o diseñador independiente tiene sus retos, y lidiar con proveedores que te quedan mal no debería ser uno de ellos. 🤝 Queremos ser tu equipo de respaldo para todo el mobiliario de tus proyectos.</p>
+        <p class="copy-text">Ser arquitecto o project manager tiene sus retos, y lidiar con proveedores que te quedan mal no debería ser uno de ellos. 🤝 Queremos ser tu equipo de respaldo para todo el mobiliario de tus proyectos.</p>
         <span class="copy-label">Headline</span>
         <p class="copy-text">Tu aliado en mobiliario corporativo</p>
         <span class="copy-label">Description</span>
@@ -334,7 +335,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
     <div class="kicker">CREATIVO 05</div>
     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0.5rem;">
       <span style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gray);letter-spacing:.04em">📎 OFI Lunes 18.mp4</span>
-      <span class="tag-main tag-b2c" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: B2C / HOME OFFICE</span>
+      <span class="tag-main tag-b2b" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: B2B / PROYECTOS</span>
     </div>
     <a href="https://drive.google.com/file/d/1y12tweLQshfQWAmrNkf4OwNR8BFpzaZJ/view?usp=drive_link" target="_blank" class="btn-drive">▶ Ver creativo en Drive</a>
     
@@ -342,33 +343,33 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <div class="card">
         <span class="tag-main">VARIANTE A · HUMOR/EMPATÍA</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">Te entiendo, el comedor es súper cómodo... hasta que llega el dolor de cuello a las 4 de la tarde. 😅 Es hora de armar un rinconcito de trabajo que se vea bien y cuide tu postura de verdad.</p>
+        <p class="copy-text">Una oficina improvisada se nota... sobre todo cuando el equipo termina agotado a las 4 de la tarde. 😅 Es hora de diseñar un espacio de trabajo que se vea bien y cuide tu postura de verdad.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">El error de trabajar desde la cama</p>
+        <p class="copy-text">El error de improvisar tu oficina</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Sillas ergonómicas que cambian tu día.</p>
+        <p class="copy-text">Espacios que cambian la productividad.</p>
         <span class="copy-label">CTA</span>
-        <span class="pill">Comprar</span>
+        <span class="pill">Cotizar proyecto</span>
       </div>
       <div class="card">
         <span class="tag-main" style="background:var(--violet-soft);color:#fff;">VARIANTE B · ESTÉTICA</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">¿Quién dijo que una silla de oficina en casa tiene que verse fea o aburrida? ✨ Mezclamos diseño increíble y ergonomía para que tu setup sea literalmente tu lugar favorito de la casa.</p>
+        <p class="copy-text">¿Quién dijo que una oficina corporativa tiene que verse fría o aburrida? ✨ Combinamos diseño, ergonomía y funcionalidad para que tu espacio sea literalmente tu lugar favorito de la casa.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">Arma un Home Office aesthetic</p>
+        <p class="copy-text">Diseñamos oficinas que enamoran</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Diseños modernos que cuidan tu espalda.</p>
+        <p class="copy-text">Diseño que proyecta tu marca.</p>
         <span class="copy-label">CTA</span>
         <span class="pill">Ver catálogo</span>
       </div>
       <div class="card">
         <span class="tag-main" style="background:var(--lilac-deep);color:var(--ink);">VARIANTE C · DESCONEXIÓN</span>
         <span class="copy-label">Primary Text (Copy)</span>
-        <p class="copy-text">Si vas a trabajar desde casa, hazlo bien. 🛑 Separar el espacio de descanso del trabajo es clave. Arma un buen setup ergonómico para evitar dolores y poder desconectar cuando termine el día.</p>
+        <p class="copy-text">Si vas a renovar tu oficina, hazlo bien. 🛑 Un espacio bien diseñado mejora el bienestar y la imagen de tu empresa. Te acompañamos en todo el proyecto para evitar dolores y poder desconectar cuando termine el día.</p>
         <span class="copy-label">Headline</span>
-        <p class="copy-text">Tu espalda merece algo mejor</p>
+        <p class="copy-text">Tu empresa merece un mejor espacio</p>
         <span class="copy-label">Description</span>
-        <p class="copy-text">Encuentra la silla perfecta en Panamá.</p>
+        <p class="copy-text">Renovamos oficinas en Panamá.</p>
         <span class="copy-label">CTA</span>
         <span class="pill">Más información</span>
       </div>
@@ -569,7 +570,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
     <div class="kicker">CARRUSEL 03</div>
     <div class="cre-head">
       <h2 style="margin:0;">Carrusel: Mitos del Mobiliario</h2>
-      <span class="tag-main tag-b2c" style="margin:0;padding:.4rem .8rem;font-size:.8rem;">DIRIGIDO A: B2C + B2B</span>
+      <span class="tag-main tag-b2b" style="margin:0;padding:.4rem .8rem;font-size:.8rem;">DIRIGIDO A: B2B / PROYECTOS</span>
     </div>
 
     <div class="carousel-imgs">
@@ -662,7 +663,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
     <div class="kicker">CARRUSEL 04</div>
     <div class="cre-head">
       <h2 style="margin:0;">Carrusel: Genérica vs Office Design</h2>
-      <span class="tag-main tag-b2c" style="margin:0;padding:.4rem .8rem;font-size:.8rem;">DIRIGIDO A: B2C + B2B</span>
+      <span class="tag-main tag-b2b" style="margin:0;padding:.4rem .8rem;font-size:.8rem;">DIRIGIDO A: B2B / PROYECTOS</span>
     </div>
 
     <div class="carousel-imgs">
@@ -678,7 +679,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <span class="copy-label" style="margin-top:0">Texto Primario · aplica a TODO el carrusel · 3 variantes para A/B</span>
       <p class="copy-text"><b style="color:var(--violet)">A ·</b> ¿Sabes cuánto dura realmente una silla de oficina? 🪑 La genérica barata se desgasta en 1 año; una Office Design te acompaña hasta 10. Lo barato sale caro. Te mostramos por qué invertir bien es ahorrar. Desliza 👉</p>
       <p class="copy-text"><b style="color:var(--violet)">B ·</b> Comprar la silla más barata parece buena idea... hasta que se rompe a los meses. 😬 Te comparamos una genérica vs una Office Design: durabilidad, comodidad y productividad. La diferencia te va a sorprender. Desliza 👇</p>
-      <p class="copy-text" style="margin-bottom:0"><b style="color:var(--violet)">C ·</b> Una buena silla no es un gasto, es una inversión. 💪 Menos dolores de espalda, más enfoque y años de duración. Te ayudamos a invertir de forma inteligente en tu comodidad. Mira la comparación 👉</p>
+      <p class="copy-text" style="margin-bottom:0"><b style="color:var(--violet)">C ·</b> Equipar tu oficina con buen mobiliario no es un gasto, es una inversión. 💪 Menos reemplazos, equipos más cómodos y años de durabilidad. Te ayudamos a invertir de forma inteligente en tu proyecto. Mira la comparación 👉</p>
     </div>
 
     <p class="lead" style="font-size:.95rem;margin-bottom:.9rem">Para cada imagen: 3 versiones de <b>Titular</b> y 3 de <b>Descripción</b> (combínalas en el A/B).</p>
@@ -715,12 +716,12 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
         <div class="hd-block">
           <span class="copy-label" style="margin-top:.4rem">Titulares</span>
           <p class="v"><b>A.</b> Menos dolor = más enfoque</p>
-          <p class="v"><b>B.</b> Tu espalda rinde mejor</p>
+          <p class="v"><b>B.</b> Tu equipo rinde mejor</p>
           <p class="v"><b>C.</b> Comodidad que se traduce en foco</p>
           <span class="copy-label">Descripciones</span>
-          <p class="v"><b>A.</b> Trabaja cómodo, rinde más.</p>
-          <p class="v"><b>B.</b> Cuida tu cuerpo durante la jornada.</p>
-          <p class="v"><b>C.</b> Productividad que empieza al sentarte.</p>
+          <p class="v"><b>A.</b> Equipo cómodo, equipo productivo.</p>
+          <p class="v"><b>B.</b> Cuida a tu equipo durante la jornada.</p>
+          <p class="v"><b>C.</b> Productividad que empieza por el mobiliario.</p>
         </div>
       </div>
       <div class="card">
@@ -731,7 +732,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
           <p class="v"><b>B.</b> Escríbenos para asesorarte</p>
           <p class="v"><b>C.</b> Elige bien desde el inicio</p>
           <span class="copy-label">Descripciones</span>
-          <p class="v"><b>A.</b> Te ayudamos a elegir tu silla ideal.</p>
+          <p class="v"><b>A.</b> Te asesoramos en el mobiliario de tu proyecto.</p>
           <p class="v"><b>B.</b> Asesoría sin compromiso.</p>
           <p class="v"><b>C.</b> Haz que cada dólar valga.</p>
         </div>
@@ -755,47 +756,21 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
     <div class="cover-logo">ECUS AGENCY</div>
     <h1>Copies listos<br>para revisión.</h1>
     <p class="lead" style="color:rgba(255,255,255,.92);font-size:clamp(1.05rem,3vw,1.28rem)">Estructurados para A/B testing en B2B y B2C.</p>
-    <div class="badge-row"><span class="badge">A/B TESTING B2B & B2C</span><span class="badge">LISTO PARA ANDROMEDA (IA)</span></div>
+    <div class="badge-row"><span class="badge">A/B TESTING · PROYECTOS B2B</span><span class="badge">LISTO PARA ANDROMEDA (IA)</span></div>
   </div>
   <div class="cover-foot"><span>Paid Media Specialist · ECUS Agency</span><span>2026</span></div>
 </section>
 
 </div>
 
-<div class="nav">
-  <button onclick="go(-1)" aria-label="anterior">←</button>
-  <span class="count" id="count">01 / 08</span>
-  <button onclick="go(1)" aria-label="siguiente">→</button>
-  <button onclick="fs()" aria-label="pantalla completa" title="Pantalla completa">⛶</button>
-</div>
-<div class="hint">← → navegar · F pantalla completa</div>
-
 <script>
-const slides=[...document.querySelectorAll('.slide')];
-let i=0;
-function show(n){
-  slides[i].classList.remove('active');
-  i=(n+slides.length)%slides.length;
-  slides[i].classList.add('active');
-  slides[i].scrollTop=0;
-  document.getElementById('count').textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
-  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
-}
-function go(d){show(i+d)}
-function fs(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key===' ')go(1);
-  if(e.key==='ArrowLeft')go(-1);
-  if(e.key.toLowerCase()==='f')fs();
+// Barra de progreso de scroll
+window.addEventListener('scroll', function(){
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  const bar = document.getElementById('progress');
+  if(bar) bar.style.width = scrolled + '%';
 });
-let sx=0,sy=0;
-document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
-document.addEventListener('touchend',e=>{
-  const dx=e.changedTouches[0].clientX-sx;
-  const dy=e.changedTouches[0].clientY-sy;
-  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy))go(dx<0?1:-1);
-});
-show(0);
 </script>
 </body>
 </html>
