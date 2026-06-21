@@ -110,10 +110,14 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 @media(max-width:1099px) and (min-width:781px){
   .cards.c4{grid-template-columns:repeat(2,1fr)}
 }
+.drivebtn{position:fixed;top:.85rem;right:clamp(.9rem,3vw,1.4rem);z-index:200;display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.02em;text-decoration:none;color:#140720;background:var(--accent);border:1px solid rgba(0,0,0,.12);padding:.6rem .95rem;border-radius:100px;box-shadow:0 8px 26px -8px rgba(201,255,59,.55);transition:transform .25s,box-shadow .25s}
+.drivebtn:hover{transform:translateY(-2px);box-shadow:0 13px 32px -8px rgba(201,255,59,.75)}
+@media(max-width:560px){.drivebtn span.lbl{display:none}.drivebtn{padding:.55rem .7rem;font-size:.9rem}}
 </style>
 </head>
 <body>
 <div class="progress" id="progress"></div>
+<a class="drivebtn" href="https://drive.google.com/drive/folders/15othQSLfUEnB9l-1Ma0Rj6aQwGPmrze1" target="_blank" rel="noopener" title="Abrir todo el material y los creativos en Google Drive">📁 <span class="lbl">Material en Drive</span></a>
 <div class="deck" id="deck">
 
 <!-- 1 COVER -->
