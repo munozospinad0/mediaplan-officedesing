@@ -113,10 +113,20 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 .drivebtn{position:fixed;top:.85rem;right:clamp(.9rem,3vw,1.4rem);z-index:200;display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.02em;text-decoration:none;color:#140720;background:var(--accent);border:1px solid rgba(0,0,0,.12);padding:.6rem .95rem;border-radius:100px;box-shadow:0 8px 26px -8px rgba(201,255,59,.55);transition:transform .25s,box-shadow .25s}
 .drivebtn:hover{transform:translateY(-2px);box-shadow:0 13px 32px -8px rgba(201,255,59,.75)}
 @media(max-width:560px){.drivebtn span.lbl{display:none}.drivebtn{padding:.55rem .7rem;font-size:.9rem}}
+
+.catfilter{position:fixed;top:.85rem;left:clamp(.9rem,3vw,1.4rem);z-index:70;display:flex;gap:.3rem;background:rgba(20,7,32,.92);backdrop-filter:blur(14px);padding:.32rem;border-radius:100px;border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 26px -10px rgba(0,0,0,.5)}
+.cf{font-family:'Space Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.72);background:transparent;border:none;padding:.5rem .78rem;border-radius:100px;cursor:pointer;transition:.2s;white-space:nowrap}
+.cf:hover{color:#fff}.cf.active{background:var(--accent);color:#140720}
+body.f-video [data-cat="carrusel"],body.f-carrusel [data-cat="video"]{display:none}
+.vid-preview{margin:.5rem 0 1rem;max-width:340px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#000;box-shadow:0 14px 40px -20px rgba(108,43,217,.5)}
+.vid-preview iframe{width:100%;height:100%;border:0;display:block}
+.slide.dark .vid-preview,.slide.violet .vid-preview{border-color:rgba(255,255,255,.14)}
+@media(max-width:560px){.cf{padding:.42rem .55rem;font-size:.58rem}.vid-preview{max-width:100%}}
 </style>
 </head>
 <body>
 <div class="progress" id="progress"></div>
+<div class="catfilter"><button class="cf active" onclick="setCat('all',this)">Todos</button><button class="cf" onclick="setCat('video',this)">🎬 Videos</button><button class="cf" onclick="setCat('carrusel',this)">🖼️ Carruseles</button></div>
 <a class="drivebtn" href="https://drive.google.com/drive/folders/15othQSLfUEnB9l-1Ma0Rj6aQwGPmrze1" target="_blank" rel="noopener" title="Abrir todo el material y los creativos en Google Drive">📁 <span class="lbl">Material en Drive</span></a>
 <div class="deck" id="deck">
 
@@ -137,7 +147,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 </section>
 
 <!-- VIDEO 1 -->
-<section class="slide">
+<section class="slide" data-cat="video">
   <div class="inner">
     <div class="kicker">CREATIVO 01</div>
     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0.5rem;">
@@ -146,6 +156,8 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
     </div>
     <p class="lead" style="font-size:.92rem;margin:.2rem 0 1rem">Segmentado exclusivamente para arquitectos. Copy alineado al concepto del video (comparación de sillas / calidad que se especifica en un proyecto). Sin menciones de precio.</p>
     <a href="https://drive.google.com/file/d/1miTefVsQiXPJsM4nz7p8c2xFWBgRLrYg/view?usp=drive_link" target="_blank" class="btn-drive">▶ Ver creativo en Drive</a>
+    <div class="vid-preview"><iframe src="https://drive.google.com/file/d/1miTefVsQiXPJsM4nz7p8c2xFWBgRLrYg/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+
     
     <div class="cards c3">
       <div class="card">
@@ -187,7 +199,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 </section>
 
 <!-- VIDEO 2 -->
-<section class="slide dark center">
+<section class="slide dark center" data-cat="video">
   <div class="inner">
     <div class="kicker">CREATIVO 02</div>
     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0.5rem;">
@@ -195,6 +207,8 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <span class="tag-main tag-b2b" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: B2B / PYMES</span>
     </div>
     <a href="https://drive.google.com/file/d/1JkH3vdfjop1ZRfKMAX7KKTtJfNfmWyLc/view?usp=drive_link" target="_blank" class="btn-drive">▶ Ver creativo en Drive</a>
+    <div class="vid-preview"><iframe src="https://drive.google.com/file/d/1JkH3vdfjop1ZRfKMAX7KKTtJfNfmWyLc/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+
     
     <div class="cards c3">
       <div class="card">
@@ -236,7 +250,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 </section>
 
 <!-- VIDEO 3 -->
-<section class="slide">
+<section class="slide" data-cat="video">
   <div class="inner">
     <div class="kicker">CREATIVO 03</div>
     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0.5rem;">
@@ -244,6 +258,8 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <span class="tag-main tag-b2b" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: B2B / ARQUITECTOS</span>
     </div>
     <a href="https://drive.google.com/file/d/1dmNXsLBLT4PTtWEbWuIEyRxS4DXEXj8B/view?usp=drive_link" target="_blank" class="btn-drive">▶ Ver creativo en Drive</a>
+    <div class="vid-preview"><iframe src="https://drive.google.com/file/d/1dmNXsLBLT4PTtWEbWuIEyRxS4DXEXj8B/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+
     
     <div class="cards c3">
       <div class="card">
@@ -285,7 +301,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 </section>
 
 <!-- VIDEO 4 -->
-<section class="slide dark center">
+<section class="slide dark center" data-cat="video">
   <div class="inner">
     <div class="kicker">CREATIVO 04</div>
     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0.5rem;">
@@ -293,6 +309,8 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <span class="tag-main tag-b2b" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: B2B / EMPRESAS</span>
     </div>
     <a href="https://drive.google.com/file/d/176PALA2yGyV0K9B5fxgekx4l5wc9FbyY/view?usp=drive_link" target="_blank" class="btn-drive">▶ Ver creativo en Drive</a>
+    <div class="vid-preview"><iframe src="https://drive.google.com/file/d/176PALA2yGyV0K9B5fxgekx4l5wc9FbyY/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+
     
     <div class="cards c3">
       <div class="card">
@@ -334,7 +352,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 </section>
 
 <!-- VIDEO 5 -->
-<section class="slide">
+<section class="slide" data-cat="video">
   <div class="inner">
     <div class="kicker">CREATIVO 05</div>
     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0.5rem;">
@@ -342,6 +360,8 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
       <span class="tag-main tag-b2b" style="margin: 0; padding: 0.4rem 0.8rem; font-size: 0.8rem;">DIRIGIDO A: B2B / PROYECTOS</span>
     </div>
     <a href="https://drive.google.com/file/d/1y12tweLQshfQWAmrNkf4OwNR8BFpzaZJ/view?usp=drive_link" target="_blank" class="btn-drive">▶ Ver creativo en Drive</a>
+    <div class="vid-preview"><iframe src="https://drive.google.com/file/d/1y12tweLQshfQWAmrNkf4OwNR8BFpzaZJ/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+
     
     <div class="cards c3">
       <div class="card">
@@ -383,7 +403,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 </section>
 
 <!-- CAROUSEL MUDANZA -->
-<section class="slide dark center">
+<section class="slide dark center" data-cat="carrusel">
   <div class="inner">
     <div class="kicker">CARRUSEL 01</div>
     <div style="display:flex;gap:10px;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;">
@@ -476,7 +496,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 
 
 <!-- CAROUSEL 02 -->
-<section class="slide center">
+<section class="slide center" data-cat="carrusel">
   <div class="inner">
     <div class="kicker">CARRUSEL 02</div>
     <div class="cre-head">
@@ -569,7 +589,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 
 
 <!-- CAROUSEL 03 -->
-<section class="slide dark center">
+<section class="slide dark center" data-cat="carrusel">
   <div class="inner">
     <div class="kicker">CARRUSEL 03</div>
     <div class="cre-head">
@@ -662,7 +682,7 @@ p{line-height:1.58;color:var(--ink-soft);font-size:clamp(.92rem,2.2vw,1rem)}
 
 
 <!-- CAROUSEL 04 -->
-<section class="slide center">
+<section class="slide center" data-cat="carrusel">
   <div class="inner">
     <div class="kicker">CARRUSEL 04</div>
     <div class="cre-head">
@@ -775,6 +795,15 @@ window.addEventListener('scroll', function(){
   const bar = document.getElementById('progress');
   if(bar) bar.style.width = scrolled + '%';
 });
+
+function setCat(c,el){
+  document.body.classList.remove('f-video','f-carrusel');
+  if(c==='video')document.body.classList.add('f-video');
+  if(c==='carrusel')document.body.classList.add('f-carrusel');
+  document.querySelectorAll('.cf').forEach(function(b){b.classList.remove('active')});
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 </script>
 </body>
 </html>
